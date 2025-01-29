@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from 'react'
 import './loginpage.css'
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from '../../Context/Context';
 import axios from 'axios';
 
@@ -12,6 +12,8 @@ const LoginPage = () => {
     // importing context 
     const {dispatch} = useContext(AuthContext);
 
+    // using use navigaet to change pages 
+    const navigate = useNavigate();
 
     // function to handel login 
     const handelLogin = async (e)=>{
@@ -23,7 +25,7 @@ const LoginPage = () => {
                 password:passRef.current.value,
             })
             dispatch({type:"LOGIN_SUCCESS",payload:res.data});
-            window.location.replace('/');
+            navigate('/',{replace:true});
         } catch (error) {
             dispatch({type:"LOGIN_FAILED",payload:error});
         }

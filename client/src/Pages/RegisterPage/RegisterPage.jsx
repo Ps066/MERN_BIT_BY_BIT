@@ -1,5 +1,5 @@
 import './registerpage.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
 import axios from "axios";
 import { useState } from 'react';
 
@@ -8,6 +8,9 @@ const RegisterPage = () => {
     const [user,setUser] = useState("");
     const [email,setEmail] = useState("");
     const [pass,setPass] = useState("");
+
+    // using use navigaet to change pages 
+    const navigate = useNavigate();
 
     //function to handel registration process
     const handelRegister = async (e)=>{
@@ -21,8 +24,7 @@ const RegisterPage = () => {
             })
 
             console.log(res.data);
-
-            window.location.replace('/login');
+            navigate('/login', {replace:true});
         } catch (error) {
             console.log(error);
         }
